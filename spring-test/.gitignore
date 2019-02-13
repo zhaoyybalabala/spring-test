@@ -1,0 +1,8 @@
+/target/
+/src/test/
+.idea
+.project
+.settings
+.iml
+.ipr
+.iws
