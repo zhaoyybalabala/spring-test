@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 默认构造函数构建 基于反射构建-->
+    <bean class="com.demo.spring.HelloSpring"></bean>
+
+    <!-- 指定构造函数构建 基于反射构建-->
+    <bean id="helloByName" class="com.demo.spring.HelloSpring" autowire="byName">
+        <constructor-arg index="0" value="zyy"/>
+        <constructor-arg name="age" value="18"/>
+    </bean>
+
+    <!-- byName-->
+    <bean id="di" name="di2" lazy-init="false" class="com.demo.spring.DI" scope="singleton" init-method="init" destroy-method="destroy"/>
+
+    <!-- byType时，如果bean相同 可以指定primary为true 来选择要注入哪一个-->
+    <bean class="com.demo.spring.DI" primary="true"/>
+    <bean class="com.demo.spring.DI"/>
+
+    <!-- 静态工厂方法构建-->
+    <bean id="helloSpring" class="com.demo.spring.HelloSpring" factory-method="buid">
+        <constructor-arg name="type" value="A"></constructor-arg>
+    </bean>
+
+    <!-- FactoryBean创建 自定义创建bean-->
+    <bean id="driver" class="com.demo.spring.DriverFactoryBean" >
+       <property name="jdbcUrl" value="jdbc:mysql://192.168.5.104:3306"></property>
+    </bean>
+
+
+    <bean class="com.demo.spring.LookUpTest" >
+        <lookup-method name="getDi"/>
+    </bean>
+</beans>
